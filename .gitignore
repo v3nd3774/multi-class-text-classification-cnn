@@ -91,3 +91,5 @@ ENV/
 # Added by Josh
 **/data
 **/logs
+**/trained_model*
+*.pdf
