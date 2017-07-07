@@ -1,8 +1,6 @@
 import re
-import logging
 import numpy as np
 import pandas as pd
-from collections import Counter
 
 def clean_str(s):
 	"""Clean sentence"""
@@ -25,8 +23,8 @@ def clean_str(s):
 
 def load_data_and_labels(filename):
 	"""Load sentences and labels"""
-	df = pd.read_csv(filename, compression='zip', dtype={'consumer_complaint_narrative': object})
-	selected = ['product', 'consumer_complaint_narrative']
+	df = pd.read_csv(filename)
+	selected = ['label', 'text']
 	non_selected = list(set(df.columns) - set(selected))
 
 	df = df.drop(non_selected, axis=1) # Drop non selected columns
@@ -62,5 +60,5 @@ def batch_iter(data, batch_size, num_epochs, shuffle=True):
 			yield shuffled_data[start_index:end_index]
 
 if __name__ == '__main__':
-	input_file = './data/consumer_complaints.csv.zip'
+	input_file = './data/politifact_train.csv'
 	load_data_and_labels(input_file)
